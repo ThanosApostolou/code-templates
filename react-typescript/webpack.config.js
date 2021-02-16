@@ -25,6 +25,9 @@ module.exports = {
         {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
             type: "asset/resource",
+            generator: {
+                filename: 'assets/[name][ext][query]'
+            }
         },
 
         // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
