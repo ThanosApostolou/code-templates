@@ -5,21 +5,21 @@ import logo from "./assets/logo512.png";
 
 
 class App extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
+    constructor(props: any) {
+        super(props);
+    }
 
-  render() {
-    return (
-      <div className="App">
-        <Router>
-          <p>hello worldss!</p>
-          <img src={logo} />
+    render() {
+        return (
+            <div className="App">
+                <Router>
+                    <p>hello worldsssd!</p>
+                    <img src={logo} />
 
-        </Router>
-      </div>
-    );
-  }
+                </Router>
+            </div>
+        );
+    }
 }
 
 export default App;

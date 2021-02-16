@@ -1,15 +1,16 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-    entry: './src/index',
+    entry: "./src/index",
     output: {
-        path: path.join(__dirname, '/build'),
-        filename: 'bundle.js'
+        path: path.join(__dirname, "/build"),
+        filename: "bundle.js"
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: [".ts", ".tsx", ".js"]
     },
 
     module: {
@@ -18,26 +19,30 @@ module.exports = {
             test: /\.(ts|js)x?$/,
             exclude: /node_modules/,
             use: {
-            loader: 'babel-loader'
+            loader: "babel-loader"
             },
         },
         {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            type: 'asset/resource',
+            type: "asset/resource",
         },
 
         // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
         {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            use: ["style-loader", "css-loader"]
         }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html',
-            favicon: './public/favicon.ico'
+            template: "./public/index.html",
+            favicon: "./public/favicon.ico"
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new ESLintPlugin({
+            extensions: ["js", "jsx", "ts", "tsx"],
+            fix: true
+        })
     ]
 };
