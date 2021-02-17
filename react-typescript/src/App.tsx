@@ -13,9 +13,8 @@ class App extends React.Component<any, any> {
         return (
             <div className="App">
                 <Router>
-                    <p>hello worldsssd!</p>
+                    <p>hello world!</p>
                     <img src={logo} />
-
                 </Router>
             </div>
         );

@@ -10,31 +10,29 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
     },
 
     module: {
         rules: [
-        {
-            test: /\.(ts|js)x?$/,
-            exclude: /node_modules/,
-            use: {
-            loader: "babel-loader"
+            {
+                test: /\.(ts|js)x?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
+                },
             },
-        },
-        {
-            test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            type: "asset/resource",
-            generator: {
-                filename: 'assets/[name][ext][query]'
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/[name][ext][query]'
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
             }
-        },
-
-        // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
-        {
-            test: /\.css$/,
-            use: ["style-loader", "css-loader"]
-        }
         ]
     },
     plugins: [
