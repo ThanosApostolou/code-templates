@@ -17,21 +17,23 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
-                exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
                 },
+                exclude: [/node_modules/, /build/]
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: "asset/resource",
                 generator: {
                     filename: 'assets/[name][ext][query]'
-                }
+                },
+                exclude: [/node_modules/, /build/]
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                use: ["style-loader", "css-loader"],
+                exclude: [/node_modules/, /build/]
             }
         ]
     },
@@ -42,6 +44,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new ESLintPlugin({
+            context: "src/",
             extensions: ["js", "jsx", "ts", "tsx"],
             fix: true
         })
