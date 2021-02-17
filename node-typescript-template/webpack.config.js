@@ -1,25 +1,29 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index",
+    entry: "./src/main.ts",
+    target: 'node',
     output: {
         path: path.join(__dirname, "/build"),
         filename: "bundle.js"
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx"]
+        extensions: [".ts", ".js"]
     },
 
     module: {
         rules: [
             {
-                test: /\.(ts|js)x?$/,
+                test: /\.ts$/,
                 use: {
-                    loader: "babel-loader"
+                    loader: "ts-loader"
                 },
+                exclude: [/node_modules/, /build/]
+            },
+            {
+                test: /\.js$/,
                 exclude: [/node_modules/, /build/]
             },
             {
@@ -29,27 +33,15 @@ module.exports = {
                     filename: 'assets/[name][ext][query]'
                 },
                 exclude: [/node_modules/, /build/]
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
-                exclude: [/node_modules/, /build/]
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: "./public/index.html",
-            favicon: "./public/favicon.ico"
-        }),
         new CleanWebpackPlugin(),
         new ESLintPlugin({
             context: "src/",
-            extensions: ["js", "jsx", "ts", "tsx"],
+            extensions: ["js", "ts"],
             fix: true
         })
-    ],
-    devServer: {
-        historyApiFallback: true,
-    }
+    ]
 };
