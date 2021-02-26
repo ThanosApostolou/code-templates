@@ -1,5 +1,4 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = (env, argv) => {    
@@ -14,7 +13,9 @@ module.exports = (env, argv) => {
         resolve: {
             extensions: [".ts", ".js"]
         },
-
+        watchOptions: {
+            ignored: [path.join(__dirname, "/node_modules"), path.join(__dirname, "/build")]
+        },
         module: {
             rules: [
                 {
@@ -39,7 +40,6 @@ module.exports = (env, argv) => {
             ]
         },
         plugins: [
-            new CleanWebpackPlugin(),
             new ESLintPlugin({
                 context: "src/",
                 extensions: ["js", "ts"],
