@@ -2,8 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
-module.exports = (env, argv) => {    
-    const isProd = argv.mode === 'production';
+module.exports = (env, argv) => {
+    const isProd = argv.mode === "production";
     return {
         entry: "./src/index",
         output: {
@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
                     type: "asset/resource",
                     generator: {
-                        filename: 'assets/[name][ext][query]'
+                        filename: "assets/[name][ext][query]"
                     },
                     exclude: [/node_modules/, /build/]
                 },
@@ -53,6 +53,7 @@ module.exports = (env, argv) => {
         ],
         devServer: {
             historyApiFallback: true,
-        }
+        },
+        devtool: isProd ? false : "eval-cheap-module-source-map"
     };
 };
